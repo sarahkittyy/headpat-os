@@ -3,6 +3,9 @@
 idt_entry idt[256];   /// The IDT.
 idt_ptr idtp;		  /// The IDT Pointer.
 
+/*
+ * `flags` is usually 0b10001110
+ */
 void setIDTEntry(size_t num,
 				 uint32_t base,
 				 uint8_t flags)
