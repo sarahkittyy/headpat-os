@@ -1,4 +1,4 @@
-#include "kernel/gdt.h"
+#include "kernel/tables.h"
 #include "std/io.h"
 #include "std/serial.h"
 
@@ -10,8 +10,6 @@ int kmain()
 	screenClear();
 
 	screenWrite("it rly do be like dat sometimes");
-
-	comWrite(COM1, "Hello from com1!");
 
 	return 0;
 }
