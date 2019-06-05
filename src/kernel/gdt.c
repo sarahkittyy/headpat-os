@@ -21,7 +21,7 @@ void setGDTEntry(size_t num,
 	entry->access = access;
 }
 
-void initTables()
+void initGDT()
 {
 	/*
 	 * Steps:
@@ -51,6 +51,6 @@ void initTables()
 	 */
 	setGDTEntry(2, 0, 0xFFFFFFFF, 0b10010010, 0b11001111);
 
-	//Init the GDT.
-	initGDT();
+	//Flush the GDT.
+	flushGDT();
 }

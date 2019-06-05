@@ -3,16 +3,17 @@
 #include "std/common.h"
 
 /**
- * @brief Initialize the GDT.
+ * @brief Flush the initialized GDT.
+ * 
+ * @see kernel/gdt.s
+ */
+void flushGDT();
+
+/**
+ * @brief Initialises the GDT and GDTP and flushes it.
  * 
  */
 void initGDT();
-
-/**
- * @brief Init the GDT and IDT.
- * 
- */
-void initTables();
 
 /**
  * @brief An entry in the GDT.

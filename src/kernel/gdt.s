@@ -1,9 +1,9 @@
-global initGDT
+global flushGDT
 extern gdtp ; kernel/gdt.c
 
 ; stack:
 ; [esp + 4] -> address to gdt struct (kernel/gdt.h @ struct gdt)
-initGDT:
+flushGDT:
 	lgdt [gdtp]
 	mov ax, 0x10
 	mov ds, ax
