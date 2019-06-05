@@ -8,7 +8,7 @@ CONF = conf
 NAME = hpOS
 
 CC = clang
-CCOPTS = -I$(INCLUDE) -std=c11 -ffreestanding -fno-rtti -fno-exceptions -m32 -fwritable-strings -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nodefaultlibs -Wall -Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -c
+CCOPTS = -I$(INCLUDE) -std=gnu99 -ffreestanding -fno-rtti -fno-exceptions -m32 -fwritable-strings -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nodefaultlibs -Wall -Werror -Wextra -Wno-unused-parameter -Wno-unused-variable -c
 
 ASM_SOURCES = $(shell find $(src) -name '*.s')
 ASM_OBJECTS = $(patsubst ./$(SRC)/%.s,./$(OBJ)/%.s.o,$(ASM_SOURCES))
