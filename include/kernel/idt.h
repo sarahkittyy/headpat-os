@@ -1,6 +1,7 @@
 #pragma once
 
 #include "std/common.h"
+#include "std/io.h"
 #include "std/lib.h"
 #include "std/serial.h"
 
