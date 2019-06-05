@@ -4,4 +4,5 @@ void initTables()
 {
 	initGDT();
 	initIDT();
+	initISRS();
 }

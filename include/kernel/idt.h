@@ -12,6 +12,18 @@
 void initIDT();
 
 /**
+ * @brief Configure an IDT entry.
+ * 
+ * @param num The interrupt number.
+ * @param base The address of the function to call.
+ * @param flags The interrupt routine flags (usually 0b10001110)
+ */
+void setIDTEntry(size_t num,
+				 /* selector = 0x08 */
+				 uint32_t base,
+				 uint8_t flags);
+
+/**
  * @brief Flushes the idtp. Called by initIDT().
  * 
  * @see kernel/idt.s
