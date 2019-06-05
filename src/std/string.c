@@ -88,9 +88,14 @@ void strcat(char* dest, const char* src)
 
 void sprintf(char* dest, const char* fmt, ...)
 {
-	//Get a pointer to the first argument.
-	char* va_arg = (char*)(&fmt) + sizeof(fmt);
+	//Call vsprintf().
+	va_list args;
+	va_start(args, fmt);
+	vsprintf(dest, fmt, args);
+}
 
+void vsprintf(char* dest, const char* fmt, va_list args)
+{
 	//Iterate over the fmt string.
 	size_t len = strlen(fmt);
 	int dest_i = 0;   //Dest vs Format index
@@ -113,8 +118,7 @@ void sprintf(char* dest, const char* fmt, ...)
 			case 'i':
 			{
 				//Get the next va_arg as an integer.
-				int arg = *((int*)va_arg);
-				va_arg += sizeof(int);
+				int arg = va_arg(args, int);
 				//Concatenate it onto the result.
 				char str[11] = {0};
 				itoa(str, arg, 10);
@@ -124,8 +128,7 @@ void sprintf(char* dest, const char* fmt, ...)
 			}
 			case 's':
 			{
-				const char* arg = *((const char**)va_arg);
-				va_arg += sizeof(const char*);
+				const char* arg = va_arg(args, const char*);
 				strcat(dest, arg);
 				dest_i += strlen(arg);
 				break;
@@ -143,4 +146,5 @@ void sprintf(char* dest, const char* fmt, ...)
 			dest_i++;
 		}
 	}
+	va_end(args);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "std/arg.h"
 #include "std/common.h"
 #include "std/math.h"
 
@@ -54,3 +55,10 @@ void reverse(char* in);
  * @param ... The arguments according to `fmt`
  */
 void sprintf(char* dest, const char* fmt, ...);
+
+/**
+ * @brief Formats a formatted string into `dest` using the variadic
+ * argument pointer `args`.
+ * 
+ */
+void vsprintf(char* dest, const char* fmt, va_list args);
