@@ -1,4 +1,15 @@
+#include "std/io.h"
+#include "std/serial.h"
+
 int kmain()
 {
-	return 0xDEADBEEF;
+	//Initialization.
+	initSerial();
+	screenClear();
+
+	screenWrite("*pats~<3*");
+
+	comWrite(COM1, "Hello from com1!");
+
+	return 0;
 }

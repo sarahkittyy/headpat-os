@@ -28,11 +28,12 @@ clean:
 
 dirs: 
 	mkdir -p $(OUT)/boot/grub
+	rsync -av --include='*/' --exclude='*' $(INCLUDE)/ $(OBJ)/
 
-$(OBJ)/%.s.o: $(SRC)/%.s
+$(OBJ)/%.s.o: $(SRC)/%.s dirs
 	nasm -f elf32 $< -o $@
 	
-$(OBJ)/%.c.o: $(SRC)/%.c
+$(OBJ)/%.c.o: $(SRC)/%.c dirs
 	$(CC) $(CCOPTS) $< -o $@
 
 $(BUILD)/kernel.elf: $(C_OBJECTS) $(ASM_OBJECTS)
