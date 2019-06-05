@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.h"
-#include "io.h"
+#include "std/common.h"
+#include "std/io.h"
 
 #define COM1 0x3F8
 #define COM2 0x2F8

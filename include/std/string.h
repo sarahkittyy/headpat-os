@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "std/common.h"
 
 /**
  * @brief Get the length of a null-terminated string.
