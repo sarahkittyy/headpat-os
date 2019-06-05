@@ -76,6 +76,14 @@ void screenClear();
 void screenWrite(const char* str);
 
 /**
+ * @brief Similar to C's standard printf(). Outputs to the screen.
+ * 
+ * @param fmt The formatted string.
+ * @param ... The arguments.
+ */
+void screenWritef(const char* fmt, ...);
+
+/**
  * @brief Write a byte out to an i/o port.
  * 
  * @param port The port.

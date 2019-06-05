@@ -92,3 +92,12 @@ void screenWrite(const char* str)
 	//Set the final cursor position.
 	setCursor(cursor_pos);
 }
+
+void screenWritef(const char* fmt, ...)
+{
+	char str[1000];
+	va_list args;
+	va_start(args, fmt);
+	vsprintf(str, fmt, args);
+	screenWrite(str);
+}
