@@ -20,6 +20,8 @@ typedef uint8_t bool;
 #define true 1
 #define false 0
 
+#define NULL 0
+
 #define BLACK 0
 #define BLUE 1
 #define GREEN 2
