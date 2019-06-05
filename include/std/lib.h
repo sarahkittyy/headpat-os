@@ -1,6 +1,7 @@
 #pragma once
 
 #include "std/common.h"
+#include "std/math.h"
 
 /**
  * @brief Sets a block of memory of bytes `num` to `value.
