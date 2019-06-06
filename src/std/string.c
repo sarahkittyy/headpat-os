@@ -136,6 +136,30 @@ void vsprintf(char* dest, const char* fmt, va_list iargs)
 				dest_i += strlen(arg);
 				break;
 			}
+			case 'h':
+			{
+				//Get the next va_arg as an integer.
+				int arg = va_arg(args, int);
+				//Concatenate it onto the result.
+				char str[11] = {0};
+				itoa(str, arg, 16);
+				comWrite(COM1, str);
+				strcat(dest, str);
+				dest_i += strlen(str);
+				break;
+			}
+			case 'b':
+			{
+				//Get the next va_arg as an integer.
+				int arg = va_arg(args, int);
+				//Concatenate it onto the result.
+				char str[11] = {0};
+				itoa(str, arg, 2);
+				comWrite(COM1, str);
+				strcat(dest, str);
+				dest_i += strlen(str);
+				break;
+			}
 			}
 
 			//Skip the next character.
