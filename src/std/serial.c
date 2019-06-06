@@ -69,4 +69,5 @@ void comWritef(uint32_t port, const char* fmt, ...)
 	char str[1000];
 	vsprintf(str, fmt, args);
 	comWrite(port, str);
+	va_end(args);
 }
