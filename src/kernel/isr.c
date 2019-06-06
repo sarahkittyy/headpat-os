@@ -116,7 +116,7 @@ const char* exceptions[] = {
  * 
  * @param fd The fault data. 
  */
-void handleFault(struct FaultData* fd)
+void handleFault(FaultData* fd)
 {
 	//Inform of an exception.
 	screenWritef("An exception occured: %s.\n", exceptions[fd->interrupt]);

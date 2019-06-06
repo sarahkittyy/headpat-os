@@ -2,6 +2,7 @@
 
 #include "kernel/gdt.h"
 #include "kernel/idt.h"
+#include "kernel/irq.h"
 #include "kernel/isr.h"
 
 /**

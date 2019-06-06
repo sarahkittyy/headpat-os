@@ -5,4 +5,5 @@ void initTables()
 	initGDT();
 	initIDT();
 	initISRS();
+	initIRQ();
 }
