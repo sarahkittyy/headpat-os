@@ -3,6 +3,7 @@
 #include "std/arg.h"
 #include "std/common.h"
 #include "std/io.h"
+#include "std/lib.h"
 #include "std/string.h"
 
 #define COM1 0x3F8
