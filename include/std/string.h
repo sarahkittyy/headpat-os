@@ -3,6 +3,7 @@
 #include "std/arg.h"
 #include "std/common.h"
 #include "std/math.h"
+#include "std/serial.h"
 
 /**
  * @brief Get the length of a null-terminated string.
@@ -58,7 +59,7 @@ void sprintf(char* dest, const char* fmt, ...);
 
 /**
  * @brief Formats a formatted string into `dest` using the variadic
- * argument pointer `args`.
+ * argument pointer `iargs`.
  * 
  */
-void vsprintf(char* dest, const char* fmt, va_list args);
+void vsprintf(char* dest, const char* fmt, va_list iargs);

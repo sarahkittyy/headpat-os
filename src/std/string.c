@@ -94,8 +94,10 @@ void sprintf(char* dest, const char* fmt, ...)
 	vsprintf(dest, fmt, args);
 }
 
-void vsprintf(char* dest, const char* fmt, va_list args)
+void vsprintf(char* dest, const char* fmt, va_list iargs)
 {
+	va_list args;
+	va_copy(args, iargs);
 	//Iterate over the fmt string.
 	size_t len = strlen(fmt);
 	int dest_i = 0;   //Dest vs Format index
@@ -122,6 +124,7 @@ void vsprintf(char* dest, const char* fmt, va_list args)
 				//Concatenate it onto the result.
 				char str[11] = {0};
 				itoa(str, arg, 10);
+				comWrite(COM1, str);
 				strcat(dest, str);
 				dest_i += strlen(str);
 				break;
@@ -146,5 +149,4 @@ void vsprintf(char* dest, const char* fmt, va_list args)
 			dest_i++;
 		}
 	}
-	va_end(args);
 }

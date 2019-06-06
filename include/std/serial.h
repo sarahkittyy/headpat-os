@@ -1,7 +1,9 @@
 #pragma once
 
+#include "std/arg.h"
 #include "std/common.h"
 #include "std/io.h"
+#include "std/string.h"
 
 #define COM1 0x3F8
 #define COM2 0x2F8
@@ -61,3 +63,12 @@ void comSend(uint32_t port, char c);
  * @param str The string to send.
  */
 void comWrite(uint32_t port, const char* str);
+
+/**
+ * @brief Formats a string and writes it to a com port.
+ * 
+ * @param port The port to send the string to.
+ * @param fmt The formatted string.
+ * @param ... The formatted string args.
+ */
+void comWritef(uint32_t port, const char* fmt, ...);

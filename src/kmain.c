@@ -10,10 +10,6 @@ int kmain()
 	initSerial();
 	screenClear();
 
-	int x = -503;
-	char str[100];
-	sprintf(str, "Hello, %s! Your number is %i.", "sawah", 5);
-	screenWrite(str);
 
 	return 0;
 }

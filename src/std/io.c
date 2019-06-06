@@ -100,4 +100,5 @@ void screenWritef(const char* fmt, ...)
 	va_start(args, fmt);
 	vsprintf(str, fmt, args);
 	screenWrite(str);
+	va_end(args);
 }
