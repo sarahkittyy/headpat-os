@@ -10,6 +10,7 @@ int kmain()
 	initSerial();
 	screenClear();
 
+	comWritef(COM1, "Hello, %s! Your number is %i!", "sawah", 42);
 
 	return 0;
 }
