@@ -81,11 +81,40 @@ void initISRS()
 /**
  * @brief The generic fault handler, called by all generic isrs.
  * 
- * @param fd 
+ * @param fd The fault data. 
  */
 void handleFault(struct FaultData* fd)
 {
-	comWrite(COM1, "FAULT HANDLED");
+	//Inform of an exception.
+	screenWritef("An exception occured, interrupt #%u\n", fd->interrupt);
+	screenWritef("Detailed logging in COM4 output.");
+
+	//Write info to COM4
+	comWritef(COM4, "Interrupt #%i, Error Code #%i\n", fd->interrupt, fd->err_code);
+	comWritef(COM4, "EAX = %h, EBX = %h, ECX = %h, EDX = %h\n",
+			  fd->eax,
+			  fd->ebx,
+			  fd->ecx,
+			  fd->edx);
+	comWritef(COM4, "EDI = %h, ESI = %h, EBP = %h, ESP = %h\n",
+			  fd->edi,
+			  fd->esi,
+			  fd->ebp,
+			  fd->esp);
+	comWritef(COM4, "GS = %h, FS = %h, ES = %h, DS = %h\n",
+			  fd->gs,
+			  fd->fs,
+			  fd->es,
+			  fd->ds);
+	comWritef(COM4, "EIP = %h, CS = %h, EFlags = %b, UserESP = %h, SS = %h\n",
+			  fd->eip,
+			  fd->cs,
+			  fd->eflags,
+			  fd->useresp,
+			  fd->ss);
+
+
+	//Halt the system
 	for (;;)
 		;
 }
