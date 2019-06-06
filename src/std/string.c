@@ -33,6 +33,31 @@ char todigit(uint8_t number)
 
 char* itoa(char* dest, int input, int base)
 {
+	int sign;
+	if (input != 0)
+	{
+		sign = input / abs(input);
+	}
+	else
+	{
+		sign = 0;
+	}
+	char nosign_dest[12] = {0};
+	utoa(nosign_dest, (uint32_t)abs(input), base);
+
+	//If the sign is negative, start with a '-' sign.
+	if (sign == -1)
+	{
+		dest[0] = '-';
+	}
+	//Concatenate dest with nosign_dest.
+	strcat(dest, nosign_dest);
+
+	return dest;
+}
+
+char* utoa(char* dest, uint32_t input, int base)
+{
 	//Special case for 0.
 	if (input == 0)
 	{
@@ -40,21 +65,14 @@ char* itoa(char* dest, int input, int base)
 		return dest;
 	}
 
-	int sign = input / abs(input);
-	input	= abs(input);
 	for (int i = 0; input != 0; ++i)
 	{
 		int d   = input % base;
 		dest[i] = todigit(d);
 		input /= base;
 	}
-	//Append a - if the sign is -
-	if (sign == -1)
-	{
-		dest[strlen(dest)] = '-';
-	}
 
-	//Reverse the string.
+	//Reverse and return.
 	reverse(dest);
 	return dest;
 }
@@ -92,6 +110,7 @@ void sprintf(char* dest, const char* fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 	vsprintf(dest, fmt, args);
+	va_end(args);
 }
 
 void vsprintf(char* dest, const char* fmt, va_list iargs)
@@ -117,18 +136,6 @@ void vsprintf(char* dest, const char* fmt, va_list iargs)
 				dest[dest_i] = '%';
 				dest_i++;
 				break;
-			case 'i':
-			{
-				//Get the next va_arg as an integer.
-				int arg = va_arg(args, int);
-				//Concatenate it onto the result.
-				char str[11] = {0};
-				itoa(str, arg, 10);
-				comWrite(COM1, str);
-				strcat(dest, str);
-				dest_i += strlen(str);
-				break;
-			}
 			case 's':
 			{
 				const char* arg = va_arg(args, const char*);
@@ -136,14 +143,35 @@ void vsprintf(char* dest, const char* fmt, va_list iargs)
 				dest_i += strlen(arg);
 				break;
 			}
+			case 'i':
+			{
+				//Get the next va_arg as an integer.
+				int arg = (int)va_arg(args, int);
+				//Concatenate it onto the result.
+				char str[12] = {0};
+				itoa(str, arg, 10);
+				strcat(dest, str);
+				dest_i += strlen(str);
+				break;
+			}
+			case 'u':
+			{
+				//Get the next va_arg as an integer.
+				uint32_t arg = va_arg(args, uint32_t);
+				//Concatenate it onto the result.
+				char str[12] = {0};
+				utoa(str, arg, 10);
+				strcat(dest, str);
+				dest_i += strlen(str);
+				break;
+			}
 			case 'h':
 			{
 				//Get the next va_arg as an integer.
-				int arg = va_arg(args, int);
+				uint32_t arg = va_arg(args, uint32_t);
 				//Concatenate it onto the result.
-				char str[11] = {0};
-				itoa(str, arg, 16);
-				comWrite(COM1, str);
+				char str[12] = {0};
+				utoa(str, arg, 16);
 				strcat(dest, str);
 				dest_i += strlen(str);
 				break;
@@ -151,10 +179,10 @@ void vsprintf(char* dest, const char* fmt, va_list iargs)
 			case 'b':
 			{
 				//Get the next va_arg as an integer.
-				int arg = va_arg(args, int);
+				uint32_t arg = va_arg(args, uint32_t);
 				//Concatenate it onto the result.
-				char str[11] = {0};
-				itoa(str, arg, 2);
+				char str[12] = {0};
+				utoa(str, arg, 2);
 				comWrite(COM1, str);
 				strcat(dest, str);
 				dest_i += strlen(str);

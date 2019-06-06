@@ -41,6 +41,16 @@ void strcat(char* dest, const char* src);
 char* itoa(char* dest, int input, int base);
 
 /**
+ * @brief Convert an unsigned integer into a string.
+ * 
+ * @param dest The destination string.
+ * @param input The input integer
+ * @param base The base to convert it into.
+ * @return char* The destination string.
+ */
+char* utoa(char* dest, uint32_t input, int base);
+
+/**
  * @brief Reverse a string in-place.
  * 
  * @param in The string to reverse.
