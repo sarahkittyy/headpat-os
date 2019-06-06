@@ -95,7 +95,7 @@ void screenWrite(const char* str)
 
 void screenWritef(const char* fmt, ...)
 {
-	char str[1000];
+	char str[1000] = {0};
 	va_list args;
 	va_start(args, fmt);
 	vsprintf(str, fmt, args);
