@@ -78,6 +78,39 @@ void initISRS()
 	setIDTEntryNum(31);
 }
 
+const char* exceptions[] = {
+	"Divide by Zero",
+	"Debug",
+	"Non Maskable Interrupt",
+	"Breakpoint",
+	"Into Detected Overflow",
+	"Out of Bounds",
+	"Invalid Opcode",
+	"No Coprocessor",
+	"Double Fault",
+	"Coprocessor Segment Overrun",
+	"Bad TSS",
+	"Segment Not Present",
+	"Stack Fault",
+	"General Protection Fault",
+	"Page fault",
+	"Unknown Interrupt",
+	"Coprocessor Fault",
+	"Alignment Check",
+	"Machine Check Exception",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved",
+	"Reserved"};
+
 /**
  * @brief The generic fault handler, called by all generic isrs.
  * 
@@ -86,11 +119,14 @@ void initISRS()
 void handleFault(struct FaultData* fd)
 {
 	//Inform of an exception.
-	screenWritef("An exception occured, interrupt #%u\n", fd->interrupt);
+	screenWritef("An exception occured: %s.\n", exceptions[fd->interrupt]);
 	screenWritef("Detailed logging in COM4 output.");
 
 	//Write info to COM4
-	comWritef(COM4, "Interrupt #%i, Error Code #%i\n", fd->interrupt, fd->err_code);
+	comWritef(COM4, "Exception: %s -- Interrupt #%i, Error Code #%i\n",
+			  exceptions[fd->interrupt],
+			  fd->interrupt,
+			  fd->err_code);
 	comWritef(COM4, "EAX = %h, EBX = %h, ECX = %h, EDX = %h\n",
 			  fd->eax,
 			  fd->ebx,
